@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# Piper / ML models
+*.onnx
+*.onnx.json
+
+# Audio files (optional)
+*.wav
+
+# Temporary files
+testing/
+Screenshots/*
+!Screenshots/.gitkeep
+*.tmp

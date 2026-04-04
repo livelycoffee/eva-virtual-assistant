@@ -1,0 +1,20 @@
+{"intents": [
+    {
+        "tag":"open_chrome",
+        "patterns":[
+            "open google","open the google app","open google app","open chrome","open the chrome app","open chrome app","open google chrome","open the google chrome app","open google chrome app","please open google","please open chrome","please open google chrome"
+        ],
+        "responses":[
+            "{\"intent\": \"open_app\",\"parameters\": {\"target\": \"Google Chrome\"}}"
+        ]
+    },
+    {
+        "tag":"open_spotify",
+        "patterns":[
+            "open spotify","open the app spotify","open the spotify app","open the spotify application","open spotify app", "i want to listen to music", "open my music app"
+        ],
+        "responses":[
+            "{\"intent\": \"open_app\",\"parameters\": {\"target\": \"Spotify\"}}"
+        ]
+    }
+]}
