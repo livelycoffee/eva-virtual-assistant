@@ -12,7 +12,7 @@ def run_eva():
             continue
 
         sp_engine.speak(get_llm_response(query))
-        if "exit" in query or "bye" in query or "shut down" in query or "shutdown" in query or "goodbye" in query:
+        if "exit" in query or "bye" in query or "shut down" in query or "shutdown" in query or "goodbye" or "go away" in query:
             listener.shutdown()
             exit(0)
             break # --> Just in case
