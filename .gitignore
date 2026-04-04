@@ -9,6 +9,9 @@ __pycache__/
 venv/
 env/
 
+# Depriciated Files
+*_depriciated.py
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -24,6 +27,9 @@ Thumbs.db
 
 # Audio files (optional)
 *.wav
+
+# Training Files
+.pth
 
 # Temporary files
 testing/

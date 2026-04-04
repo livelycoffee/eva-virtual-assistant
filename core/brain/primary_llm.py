@@ -1,11 +1,10 @@
 from ollama import chat
 from ollama import ChatResponse
 import json, os
-#from core.brain.function_llm import llm_exec
 from exec_layer.normal_exec.normal_exec import command_registry
 
-MODEL = "qwen3:4b-q4_K_M" # --> qwen3:4b-q4_K_M or gemma3 or pheem49/Luna:qwen3-4b
-MODEL_SMALL = "qwen3:0.6b"
+MODEL = "qwen3:4b-q4_K_M" # --> or gemma3 or pheem49/Luna:qwen3-4b
+#MODEL_SMALL = "qwen3:0.6b" # commented to prevent errors on runtime, uncomment if required
 CHAT_LOG = "database/chat_log.json"
 MAX_HISTORY = 50
 
@@ -20,12 +19,6 @@ Rules:
 •⁠ Only use the provided data. (ignore \"None\")"""
 
 TOOLS = command_registry
-
-class MainLLM():
-    def __init__(self):
-        pass
-
-    
 
 def get_llm_response(query):
     tool_used = False
@@ -71,13 +64,13 @@ def get_llm_response(query):
 
     if tool_used:
         response: ChatResponse = chat(
-            model=MODEL,
+            model=MODEL, # or MODEL_SMALL
             messages=[
                 {
                     "role": "system",
-                    "content": SYSTEM_MESSAGE
+                    "content": SYSTEM_MESSAGE # or SYSTEM_MESSAGE_SMALL
                 },
-                history[-5:], # !--> No history required, still given for better results
+                history[-5:], # --> No history required if using MODEL_SMALL, do give for better results
                 {
                     "role": "assistant",
                     "tool_calls": response.message.tool_calls

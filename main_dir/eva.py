@@ -9,8 +9,9 @@ import random
 import os
 from exec_layer.normal_exec.normal_exec import request_exec
 
-os.environ['KMP_DUPLICATE_LIB_OK']='True'
+os.environ['KMP_DUPLICATE_LIB_OK']='True' # --> Prevent too many debug messages
 
+# DO NOT CHANGE
 INTENTS_FILE = "data/intents.json"
 PTH_FILE = "data/intents.pth"
 
@@ -226,5 +227,8 @@ def main_task_exec(query):
             return False
     except:
         return False
+    
+# NOTE: This is a very old 2015-style BoW Instent Classifier
+# Credits go to KaushikShresh on YouTube
 
 #*----------END OF CODE----------*

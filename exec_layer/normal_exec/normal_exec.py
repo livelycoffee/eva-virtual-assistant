@@ -5,11 +5,11 @@ import pyautogui as pag
 import webbrowser
 import urllib.parse
 from exec_layer.normal_exec.int_check import is_connected
-import operator
+#import operator
 
 import subprocess, os, sys
-import threading
-import requests
+#import threading
+#import requests
 import time
 import json
 import re
@@ -28,6 +28,13 @@ def register(name):
 
 with open(APP_REG_FILE, "r") as file:
     app_registry = json.load(file)
+
+
+# DEVELOPER NOTE #----------------------------------------------------------------------------------
+# Most of these functions were created keeping in mind macOS (Apple Sillicon) functionality in mind.
+# Windows-Compatible Versions (and maybe even a Linux compatible version) will be coming out soon.
+#---------------------------------------------------------------------------------------------------
+
 
 # ---------- HELPER FUNCTION DEFINITIONS ----------
 
@@ -299,7 +306,7 @@ def open_file(path: str) -> bool:
         subprocess.run(["open", path], check=True)
         return True
     except Exception as e:
-        print("Error:", e)
+        print(f"[ERR - open_file]: {e}")
         return False
 
 
@@ -343,7 +350,8 @@ def wait_function(seconds: int) -> None:
 
 # ---------- PLUGIN FUNCTION DEFINITIONS ----------
 
-# >> For USER to Add
+# >> For USER to Add Custom Functions
+# Make sure to provide proper docstrings to each function. --> Helps LLM with tool-calling
 
 # ---------- MAIN EXEC ----------
 

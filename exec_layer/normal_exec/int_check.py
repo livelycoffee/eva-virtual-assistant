@@ -7,7 +7,7 @@ def is_connected():
     except:
         return False
 
-# def is_connected(): --> Old
+# def is_connected(): --> Old (Used to work, for some reason...)
 #     try:
 #         import pywhatkit
 #         return True
