@@ -7,7 +7,7 @@ import torch
 import numpy as np 
 import random
 import os
-from exec_layer.normal_exec.main_exec import request_exec
+from exec_layer.main_executor.executor import request_exec
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True' # --> Prevent too many debug messages
 

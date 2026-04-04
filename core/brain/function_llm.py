@@ -1,6 +1,6 @@
 from ollama import chat
 from ollama import ChatResponse
-from exec_layer.normal_exec.main_exec import command_registry
+from exec_layer.main_executor.executor import command_registry
 
 MODEL = "functiongemma"
 DEFAULT_SYS_MESSAGE = "You are an AI Assistant that can do tool calling using the following given tools. Execute given query properly and use the correct tool(s) with proper parameters as required accordingly."

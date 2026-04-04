@@ -1,7 +1,7 @@
 from ollama import chat
 from ollama import ChatResponse
 import json, os
-from exec_layer.normal_exec.main_exec import command_registry
+from exec_layer.main_executor.executor import command_registry
 
 MODEL = "qwen3:4b-q4_K_M" # --> or gemma3 or pheem49/Luna:qwen3-4b
 #MODEL_SMALL = "qwen3:0.6b" # commented to prevent errors on runtime, uncomment if required
