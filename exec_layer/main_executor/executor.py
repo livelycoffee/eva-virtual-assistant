@@ -9,7 +9,7 @@ import time
 import platform
 from exec_layer.platform_functions import macos, windows
 
-# ---------- HASHMAP SETUP ----------
+# ---------- PLATFORM AND HASHMAP SETUP ----------
 
 command_registry = {}
 
@@ -65,6 +65,61 @@ def close_app(target: str) -> bool:
     return _platform[PLATFORM].close_app(target)
 
 
+@register("take_screenshot")
+def take_screenshot(filename: str) -> bool:
+    '''
+    Function to take a screenshot.
+
+    Args:
+        filename (str): Name of the file (or path) you want to save the screenshot as.
+
+    Returns:
+        status (bool): Status of taking a screenshot.
+    '''
+    return _platform[PLATFORM].take_screenshot(filename)
+
+
+@register("get_battery_information")
+def get_battery_information() -> dict:
+    '''
+    Function to get power/battery levels/information of the user device.
+
+    Returns:
+        battery_information (dict): Various information regarding the device battery level.
+    '''
+    return _platform[PLATFORM].get_battery_information()
+
+
+@register("open_file")
+def open_file(path: str) -> bool:
+    """
+    Open a file or folder.
+
+    Args:
+        path (str): Path to file or folder. (use local path r\"Screenshots/<filename>\" for Screenshots)
+
+    Returns:
+        status (bool): Success status of opening the file.
+    """
+    return _platform[PLATFORM].open_file(path)
+
+
+@register("set_volume")
+def set_volume(level: int) -> bool:
+    """
+    Set system volume.
+
+    Args:
+        level (int): Volume level (0-100)
+
+    Returns:
+        status (bool): Success status of changing the volume.
+    """
+    return _platform[PLATFORM].set_volume(level)
+
+
+# ---------- DEFAULT FUNCTION DEFINITIONS ---------- (PLATFORM INDEPENDENT)
+
 @register("get_current_time")
 def get_current_time() -> str:
     '''
@@ -99,31 +154,6 @@ def get_current_day() -> str:
     '''
     day = datetime.datetime.now().strftime("%A")
     return day
-
-
-@register("take_screenshot")
-def take_screenshot(filename: str) -> bool:
-    '''
-    Function to take a screenshot.
-
-    Args:
-        filename (str): Name of the file (or path) you want to save the screenshot as.
-
-    Returns:
-        status (bool): Status of taking a screenshot.
-    '''
-    return _platform[PLATFORM].take_screenshot(filename)
-
-
-@register("get_battery_information")
-def get_battery_information() -> dict:
-    '''
-    Function to get power/battery levels/information of the user device.
-
-    Returns:
-        battery_information (dict): Various information regarding the device battery level.
-    '''
-    return _platform[PLATFORM].get_battery_information()
 
 
 @register("open_link") # --> PLATFORM INDEPENDENT
@@ -196,49 +226,6 @@ def search_web(query: str) -> bool:
         return False
 
 
-@register("check_internet") # --> PLATFORM INDEPENDENT
-def check_internet() -> bool:
-    """
-    Check if the device is connected to the internet.
-
-    Returns:
-        status (bool): Status of Internet Connection.
-    """
-    return is_connected()
-
-
-@register("open_file")
-def open_file(path: str) -> bool:
-    """
-    Open a file or folder.
-
-    Args:
-        path (str): Path to file or folder. (use local path r\"Screenshots/<filename>\" for Screenshots)
-
-    Returns:
-        status (bool): Success status of opening the file.
-    """
-    return _platform[PLATFORM].open_file(path)
-
-
-@register("set_volume")
-def set_volume(level: int) -> bool:
-    """
-    Set system volume.
-
-    Args:
-        level (int): Volume level (0-100)
-
-    Returns:
-        status (bool): Success status of changing the volume.
-    """
-    return _platform[PLATFORM].set_volume(level)
-
-
-# ---------- DEFAULT FUNCTION DEFINITIONS ---------- (PLATFORM SPECIFIC)
-
-
-
 # ---------- DEFAULT FUNCTION DEFINITIONS ---------- (Pythonic)
 
 @register("wait_function") # --> Pythonic Function
@@ -255,6 +242,17 @@ def wait_function(seconds: int) -> None:
     time.sleep(seconds)
 
 
+@register("check_internet") # --> PLATFORM INDEPENDENT
+def check_internet() -> bool:
+    """
+    Check if the device is connected to the internet.
+
+    Returns:
+        status (bool): Status of Internet Connection.
+    """
+    return is_connected()
+
+
 @register("shutdown") # --> Pythonic Function
 def shutdown() -> None:
     '''
@@ -265,10 +263,12 @@ def shutdown() -> None:
     '''
     exit()
 
+
 # ---------- PLUGIN FUNCTION DEFINITIONS ----------
 
 # >> For USER to Add Custom Functions
 # Make sure to provide proper docstrings to each function. --> Helps LLM with tool-calling
+
 
 # ---------- MAIN EXEC REQUESTOR ----------
 
