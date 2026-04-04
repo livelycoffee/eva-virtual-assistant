@@ -17,5 +17,6 @@ Using EVA is pretty simple, especially if you have a Mac! Just follow the follow
 And thats it! Just run the `main.py` file using `python -m main` and watch EVA run!
 > NOTE: First few runs do tend to take some time. LLM will get faster as the model warms up. Same goes for Piper.
 
-### Official Docs and More Information will be out soon!
+### More Information will be out soon!
+Official Docs: https://eva-virtual-assistant.notion.site/EVA-AI-337d6094011980ec89fed83db235bb4c
 Happy coding! - LC
