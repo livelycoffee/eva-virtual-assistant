@@ -348,6 +348,16 @@ def wait_function(seconds: int) -> None:
     '''
     time.sleep(seconds)
 
+@register("shutdown")
+def shutdown() -> None:
+    '''
+    Function to exit the program and shutdown EVA. (IF user says goodbye or asks to exit/shutdown).
+
+    Returns:
+        None
+    '''
+    exit()
+
 # ---------- PLUGIN FUNCTION DEFINITIONS ----------
 
 # >> For USER to Add Custom Functions
