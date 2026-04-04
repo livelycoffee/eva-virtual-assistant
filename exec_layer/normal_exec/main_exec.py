@@ -14,6 +14,9 @@ import time
 import json
 import re
 
+import platform
+from exec_layer.normal_exec.platform_func_impl import macos, windows
+
 # ---------- HASHMAP SETUP ----------
 
 MACOS_APP_REG_FILE = f"assets/system/macos_app_registry.json"
