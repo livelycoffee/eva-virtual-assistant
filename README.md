@@ -19,4 +19,4 @@ And thats it! Just run the `main.py` file using `python -m main` and watch EVA r
 
 ### More Information will be out soon!
 Official Docs: https://eva-virtual-assistant.notion.site/EVA-AI-337d6094011980ec89fed83db235bb4c
-Happy coding! - LC
+> Happy coding! - LC
