@@ -16,7 +16,7 @@ import re
 
 # ---------- HASHMAP SETUP ----------
 
-APP_REG_FILE = f"assets/system/app_registry.json"
+MACOS_APP_REG_FILE = f"assets/system/macos_app_registry.json"
 command_registry = {}
 app_registry = {}
 
@@ -26,7 +26,7 @@ def register(name):
         return func
     return decorator
 
-with open(APP_REG_FILE, "r") as file:
+with open(MACOS_APP_REG_FILE, "r") as file:
     app_registry = json.load(file)
 
 
