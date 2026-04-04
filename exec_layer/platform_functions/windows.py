@@ -14,27 +14,27 @@
 
 
 def open_app(target: str) -> bool:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 def close_app(target: str) -> bool:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 def take_screenshot(filename: str) -> bool:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 def get_battery_information() -> dict:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 def open_file(path: str) -> bool:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 def set_volume(level: int) -> bool:
-    pass
+    raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
 # ---------- MACOS PLUGIN FUNCTIONS ----------
