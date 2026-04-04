@@ -13,7 +13,7 @@ SPEECH_THRESHOLD = 3.6 # old - 3.5
 AUDIO_THRESHOLD = 0.1 # old - 0.1
 LOOP_SLEEP_TIME = 0.03 # seconds
 
-SAMPLE_RATE = 16000
+SAMPLE_RATE = 16000 # needs to support dynamic selection in the future
 
 class Listener:
     def __init__(self):
@@ -36,7 +36,10 @@ class Listener:
             self.prev_time = time.time() 
 
         if volume > AUDIO_THRESHOLD and self.started: # AUDIO DETECTION
-            self.audio_queue.put(indata.copy())
+            try:
+                self.audio_queue.put_nowait(indata.copy())
+            except queue.Full:
+                pass # --> Drop frames instead of blocking (improved stability)
 
     def listen(self) -> np.typing.NDArray[np.float32]:
         self.started = False
@@ -78,19 +81,18 @@ class Listener:
         self.stream.close()
 
 def listen_and_transcribe(listener: Listener) -> str:
-    while True:
-        query = ""
-        audio = listener.listen()
-        if len(audio) != 0:
-            print("[SR]: Recognising...")
-            try:
-                segments, info = model.transcribe(audio, language = "en", task="translate", condition_on_previous_text=False)
-                query = "".join([segment.text.strip() for segment in segments])
-            except:
-                print()
-                return ""
-        print(f"\nUSER: {str(query)}")
-        query = str(query).lower()
-        return query
+    query = ""
+    audio = listener.listen()
+    if len(audio) != 0:
+        print("[SR]: Recognising...")
+        try:
+            segments, info = model.transcribe(audio, language = "en", task="translate", condition_on_previous_text=False)
+            query = "".join([segment.text.strip() for segment in segments])
+        except:
+            print()
+            return ""
+    print(f"\nUSER: {str(query)}")
+    query = str(query).lower()
+    return query
 
 #*---------- END OF CODE ----------*

@@ -10,7 +10,7 @@ venv/
 env/
 
 # Depriciated Files
-*_depriciated.py
+**/*_depriciated.py
 
 # OS files
 .DS_Store
@@ -29,7 +29,7 @@ Thumbs.db
 *.wav
 
 # Training Files
-.pth
+data/*.pth
 
 # Temporary files
 testing/
