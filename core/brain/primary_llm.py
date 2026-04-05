@@ -1,12 +1,20 @@
+# ---------- IMPORTS ----------
+
 from ollama import chat
 from ollama import ChatResponse
 import json, os
 from exec_layer.main_executor.executor import command_registry
+from backend.config import Config
 
-MODEL = "qwen3:4b-q4_K_M" # --> or gemma3 or pheem49/Luna:qwen3-4b
+# ---------- CONFIGURATION ----------
+
+config = Config()
+
+MODEL = config.get_parameter("PRIMARY_LLM_MODEL") # --> or gemma3 or pheem49/Luna:qwen3-4b
 #MODEL_SMALL = "qwen3:0.6b" # commented to prevent errors on runtime, uncomment if required
-CHAT_LOG = "database/chat_log.json"
-MAX_HISTORY = 50
+
+CHAT_LOG = config.get_parameter("database.CHAT_LOG")
+MAX_HISTORY = config.get("memory.MAX_HISTORY", 50)
 
 SYSTEM_MESSAGE = "You are EVA, an AI Assistant. Respond in short in only 1-2 sentences max, or maybe even less, until and unless specified by the user or absolutely necessary. Never respond with emojis. Use the tools (with proper input) only when the user asks for a task to be done."
 
@@ -18,7 +26,9 @@ Rules:
 •⁠ Do not hallucinate.
 •⁠ Only use the provided data. (ignore \"None\")"""
 
-TOOLS = command_registry
+TOOLS = command_registry # Do not add to config
+
+# ---------- MAIN LLM FUNCTION ----------
 
 def get_llm_response(query):
     tool_used = False

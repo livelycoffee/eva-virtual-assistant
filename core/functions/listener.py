@@ -126,7 +126,7 @@ def listen_and_transcribe(listener: Listener, transcriber: FS_Transcriber) -> st
         print("[SR]: Recognising...")
         query = transcriber.transcribe(audio)
     if query:
-        print(f"\{USER_NAME}: {str(query)}")
+        print(f"\n{USER_NAME}: {str(query)}")
     query = str(query).lower()
     return query
 
