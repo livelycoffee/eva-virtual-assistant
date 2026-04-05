@@ -1,9 +1,17 @@
+# ---------- IMPORTS ----------
+
 from piper.voice import PiperVoice
 import numpy as np
 import sounddevice as sd
+from backend.config import Config
 
-PIPER_MODEL = "models/voice_models/piper-model.onnx" # or path to piper model
-# NOTE: Make sure you have a matching .onnx.json file for your model
+# ---------- CONFIGURATION ----------
+
+cf = Config()
+PIPER_MODEL = cf.get_parameter("models.PIPER_MODEL") # or path to piper model
+ASSISTANT_NAME = cf.get("assistant.name", "EVA")
+
+# ---------- SPEECH ENGINE ----------
 
 class SpeechEngine():
     def __init__(self):
@@ -18,7 +26,7 @@ class SpeechEngine():
             chunks.append(data)
         audio = np.concatenate(chunks)
         audio = audio.astype(np.float32) / 32767.0 # --> or 32768.0
-        print(f"\nEVA: {text}\n")
+        print(f"\n{ASSISTANT_NAME}: {text}\n")
         sd.play(audio, samplerate=self.SAMPLE_RATE) # --> play audio later
         sd.wait()
 

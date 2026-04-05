@@ -1,19 +1,27 @@
+# ---------- IMPORTS ----------
+
 import sounddevice as sd
 import numpy as np
 from faster_whisper import WhisperModel
 import time
 import math
 import queue
+from backend.config import Config
 
-MODEL_SIZE = "tiny" # or "small"
-model = WhisperModel(MODEL_SIZE, device="cpu", compute_type="int8") # or CUDA with float32
+# ---------- CONFIGURATION SETUP ----------
 
-PAUSE_THRESHOLD = 1.2 # seconds
-SPEECH_THRESHOLD = 3.6 # old - 3.5
-AUDIO_THRESHOLD = 0.1 # old - 0.1
-LOOP_SLEEP_TIME = 0.03 # seconds
+config = Config()
 
-SAMPLE_RATE = 16000 # needs to support dynamic selection in the future
+MODEL_SIZE = config.get("models.WHISPER_MODEL", "tiny")
+
+PAUSE_THRESHOLD = config.get("listener.PAUSE_THRESHOLD", 1.2)
+SPEECH_THRESHOLD = config.get("listener.SPEECH_THRESHOLD", 3.6)
+AUDIO_THRESHOLD = config.get("listener.AUDIO_THRESHOLD", 0.1)
+LOOP_SLEEP_TIME = config.get("listener.LOOP_SLEEP_TIME", 0.03)
+
+SAMPLE_RATE = 16000 # Needs to support dynamic selection in the future (DO NOT ADD TO CONFIG)
+
+# ---------- LISTENER CLASS ----------
 
 class Listener:
     def __init__(self):
@@ -47,7 +55,6 @@ class Listener:
         self.prev_time = time.time()
 
         self.stream.start()
-        print("[SR]: Listening...")
         while True: # INNER LOOP
             time.sleep(LOOP_SLEEP_TIME)
             try:
@@ -80,18 +87,33 @@ class Listener:
             self.stream.stop()
         self.stream.close()
 
-def listen_and_transcribe(listener: Listener) -> str:
+# ---------- FASTER-WHISPER TRANSCRIBER ----------
+
+class FS_Transcriber:
+    def __init__(self):
+        self.model = WhisperModel(MODEL_SIZE, device="cpu", compute_type="int8") # or CUDA with float32
+    
+    def transcribe(self, audio) -> str:
+        try:
+            segments, info = self.model.transcribe(audio, language = "en", task="translate", condition_on_previous_text=False)
+            query = "".join([segment.text.strip() for segment in segments])
+            return query
+        except Exception as e:
+            print(f"[ERR - transcriber]: {e}")
+            return ""
+        
+# ---------- MAIN MIC+TRANSCRIBE EXEC FUNCTION ----------
+
+def listen_and_transcribe(listener: Listener, transcriber: FS_Transcriber) -> str:
     query = ""
+    print("[SR]: Listening...")
     audio = listener.listen()
+    print("[SR]: Audio recorded.")
     if len(audio) != 0:
         print("[SR]: Recognising...")
-        try:
-            segments, info = model.transcribe(audio, language = "en", task="translate", condition_on_previous_text=False)
-            query = "".join([segment.text.strip() for segment in segments])
-        except:
-            print()
-            return ""
-    print(f"\nUSER: {str(query)}")
+        query = transcriber.transcribe(audio)
+    if query:
+        print(f"\nUSER: {str(query)}")
     query = str(query).lower()
     return query
 

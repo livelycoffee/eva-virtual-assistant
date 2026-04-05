@@ -1,0 +1,13 @@
+assistant:
+  name: "EVA"
+
+models:
+  PIPER_MODEL: "models/voice_models/piper-model-here"
+  # NOTE: Make sure you have a matching .onnx.json file for your model 
+  WHISPER_MODEL: "tiny" # or "small"
+
+listener:
+  PAUSE_THRESHOLD: 1.2 # seconds
+  SPEECH_THRESHOLD: 3.6 # old - 3.5
+  AUDIO_THRESHOLD: 0.1 # old - 0.1
+  LOOP_SLEEP_TIME: 0.03 # seconds
