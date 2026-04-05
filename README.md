@@ -25,7 +25,7 @@ And thats it! Just run the `main.py` file using `python -m main` and watch EVA r
 
 ### Common Issues with EVA
 
-1. EVA Hangs on Listening...
+> EVA Hangs on Listening...
 
 Currently, this is a known bug on macOS, but a temporary fix is in place. If it still happens, you can do the following:  
 
@@ -40,7 +40,7 @@ This should have successfully stopped your program. Next do the following to pre
 2. Go to `STREAM_LIFETIME` under `listener:` and change it from 4 to something lower. Try 3 or 2.
 Now when you run the program, it should work just fine. Please raise an issue if this does now work.
 
-2. Assistant says they did an action, but no tool called.
+> Assistant says they did an action, but no tool called.
 
 Yes, sometimes the LLM does "forget" to actually call the tool, or it tries to call a tool that does not exist.  
 We will be trying to improve LLM tool-calling in the future, so this currently has no real fix, apart from using a better Qwen3 model which you can install using `ollama pull qwen3` and then change the config to use it instead.
