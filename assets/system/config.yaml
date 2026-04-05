@@ -1,6 +1,9 @@
 assistant:
   name: "EVA"
 
+user:
+  name: "USER"
+
 models:
   PIPER_MODEL: "models/voice_models/piper-model-here"
   # NOTE: Make sure you have a matching .onnx.json file for your model 

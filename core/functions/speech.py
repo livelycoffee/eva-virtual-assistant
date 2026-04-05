@@ -19,7 +19,7 @@ class SpeechEngine():
         self.SAMPLE_RATE = self.voice.config.sample_rate
         
     def speak(self, text: str) -> None:
-        audio = self.voice.synthesize(text) # --> synthesize first
+        audio = self.voice.synthesize(text.encode("ascii", "ignore").decode()) # --> synthesize first
         chunks = []
         for chunk in audio:
             data = np.frombuffer(chunk.audio_int16_bytes, dtype=np.int16)

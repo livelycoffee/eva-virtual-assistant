@@ -3,7 +3,7 @@
 import datetime
 import webbrowser
 import urllib.parse
-from exec_layer.main_executor import is_connected
+from exec_layer.main_executor.int_check import is_connected
 import time
 
 import platform

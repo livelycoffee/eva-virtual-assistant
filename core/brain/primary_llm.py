@@ -51,8 +51,8 @@ def get_llm_response(query):
             try:
                 func = TOOLS.get(tool.function.name)
                 if func:
+                    print(f"[WARN]: {tool.function.name} TOOL WAS CALLED")
                     result = func(**tool.function.arguments)
-                    print("TOOL WAS CALLED")
                     tool_payload.append({
                         "tool": tool.function.name,
                         "args": tool.function.arguments,

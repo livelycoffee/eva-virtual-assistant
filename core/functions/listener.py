@@ -13,6 +13,7 @@ from backend.config import Config
 config = Config()
 
 MODEL_SIZE = config.get("models.WHISPER_MODEL", "tiny")
+USER_NAME = config.get("user.name", "USER")
 
 PAUSE_THRESHOLD = config.get("listener.PAUSE_THRESHOLD", 1.2)
 SPEECH_THRESHOLD = config.get("listener.SPEECH_THRESHOLD", 3.6)
@@ -53,6 +54,12 @@ class Listener:
         self.started = False
         self.sound_data = []
         self.prev_time = time.time()
+
+        while not self.audio_queue.empty():
+            try:
+                self.audio_queue.get_nowait()
+            except queue.Empty:
+                break
 
         self.stream.start()
         while True: # INNER LOOP
@@ -113,7 +120,7 @@ def listen_and_transcribe(listener: Listener, transcriber: FS_Transcriber) -> st
         print("[SR]: Recognising...")
         query = transcriber.transcribe(audio)
     if query:
-        print(f"\nUSER: {str(query)}")
+        print(f"\{USER_NAME}: {str(query)}")
     query = str(query).lower()
     return query
 
