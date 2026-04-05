@@ -35,10 +35,14 @@ To first exit the program, you must run the following commands in the terminal w
     - Try to find a process that ends with `... -m main` or `... main`.
     - Copy the Porcess ID (will be a 4-5 digit number, eg. 5103) of the process.
 3. `kill process-id` where you replace `process-id` with the ID you copied.
+
 This should have successfully stopped your program. Next do the following to prevent this:
 1. Open the `assets/system/config.yaml` file.
 2. Go to `STREAM_LIFETIME` under `listener:` and change it from 4 to something lower. Try 3 or 2.
+
 Now when you run the program, it should work just fine. Please raise an issue if this does now work.
+
+---
 
 > Assistant says they did an action, but no tool called.
 
