@@ -14,4 +14,4 @@ listener:
   SPEECH_THRESHOLD: 3.6 # old - 3.5
   AUDIO_THRESHOLD: 0.1 # old - 0.1
   LOOP_SLEEP_TIME: 0.03 # seconds
-  STREAM_LIFETIME: 3 # seconds
+  STREAM_LIFETIME: 4 # seconds
