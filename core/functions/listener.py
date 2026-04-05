@@ -19,6 +19,7 @@ PAUSE_THRESHOLD = config.get("listener.PAUSE_THRESHOLD", 1.2)
 SPEECH_THRESHOLD = config.get("listener.SPEECH_THRESHOLD", 3.6)
 AUDIO_THRESHOLD = config.get("listener.AUDIO_THRESHOLD", 0.1)
 LOOP_SLEEP_TIME = config.get("listener.LOOP_SLEEP_TIME", 0.03)
+STREAM_LIFETIME = config.get("listener.STREAM_LIFETIME", 3)
 
 SAMPLE_RATE = 16000 # Needs to support dynamic selection in the future (DO NOT ADD TO CONFIG)
 
@@ -69,6 +70,11 @@ class Listener:
                 self.sound_data.append(chunk)
             except queue.Empty:
                 continue
+
+            if ((time.time() - self.prev_time) >= STREAM_LIFETIME) and not self.started: # --> Temporary macos hang fix
+                self.stream.stop()
+                self.stream.start()
+
             if ((time.time() - self.prev_time) >= PAUSE_THRESHOLD) and self.started:
                 break
         self.stream.stop()
