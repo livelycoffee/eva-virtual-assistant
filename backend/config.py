@@ -27,7 +27,7 @@ class Config:
         except FileNotFoundError:
             raise ConfigException(f"Config file '{self.CONFIG_FILE}' not found")
 
-    def get_parameter(self, param: str) -> Any: # --> Use only if parameter is REQUIRED (Strict)
+    def get_parameter(self, param: str, required=False) -> Any: # --> Use only if parameter is REQUIRED (Strict)
         if self.config is None:
             raise ConfigException("Config file not loaded")
         
@@ -38,11 +38,16 @@ class Config:
             if _param not in result:
                 raise ConfigException(f"Missing config parameter: '{_param}'")
             result = result[_param]
+        if result is None and required:
+            raise ConfigException(f"No value defined for parameter: '{param}'")
         return result
            
-    def get(self, param: str, default: Any = None) -> Any: # --> General use cases (use default)
+    def get(self, param: str, default: Any = None, required=False) -> Any: # --> General use cases (use default)
         if self.config is None:
             raise ConfigException("Config file not loaded")
+        
+        if default is None and required:
+            raise ConfigException("No value set for 'default' but is required")
         
         params = param.split(".")
         result = self.config
@@ -51,6 +56,8 @@ class Config:
             if _param not in result:
                 return default
             result = result.get(_param, default)
+        if result is None and required:
+            return default
         return result
 
     def set_parameter(self, param: str, value: Any) -> None:
