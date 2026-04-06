@@ -60,9 +60,11 @@ class Config:
             return default
         return result
 
-    def set_parameter(self, param: str, value: Any) -> None:
+    def set_parameter(self, param: str, value: Any, required: bool = False) -> None:
         if self.config is None:
             raise ConfigException("Config file not loaded")
+        if value is None and required:
+            raise ConfigException(f"No value provided for '{param}' but is required")
         self.config[param] = value
 
     def update_config_file(self) -> None:
