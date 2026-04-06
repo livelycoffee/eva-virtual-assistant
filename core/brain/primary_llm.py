@@ -10,7 +10,7 @@ from backend.config import Config
 
 config = Config()
 
-MODEL = config.get_parameter("PRIMARY_LLM_MODEL") # --> or gemma3 or pheem49/Luna:qwen3-4b
+MODEL = config.get_parameter("models.PRIMARY_LLM_MODEL") # --> or gemma3 or pheem49/Luna:qwen3-4b
 #MODEL_SMALL = "qwen3:0.6b" # commented to prevent errors on runtime, uncomment if required
 
 CHAT_LOG = config.get_parameter("database.CHAT_LOG")
@@ -92,7 +92,7 @@ def get_llm_response(query):
             ], stream=False, think=False)
 
     history.append({"role": "user", "content": query})
-    history.append({"role":"assistant","content":response.message.content})
+    history.append({"role":"assistant","content":str(response.message.content)})
     history = history[-MAX_HISTORY:]
 
     with open(CHAT_LOG, "w") as file:
