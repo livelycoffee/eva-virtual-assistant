@@ -6,7 +6,7 @@ import re
 
 # ---------- APP REGISTRY SETUP ----------
 
-MACOS_APP_REG_FILE = f"assets/system/macos_app_registry.json"
+MACOS_APP_REG_FILE = f"assets/system/macos/macos_app_registry.json"
 app_registry = {}
 
 with open(MACOS_APP_REG_FILE, "r") as file:

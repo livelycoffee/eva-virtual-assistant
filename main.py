@@ -3,13 +3,18 @@
 from core.functions.speech import SpeechEngine
 from core.functions.listener import listen_and_transcribe, Listener, FS_Transcriber
 from core.brain.primary_llm import get_llm_response
+from backend.config import Config
 
 # ---------- MAIN ----------
 
 def run_eva():
+    main_config = Config()
+    main_config.load_config_file()
+
     listener = Listener() # --> Initialises listener
     sp_engine = SpeechEngine() # --> Initialises Speech Engine
     fs_transcriber = FS_Transcriber() # --> Initialises transcriber
+
     try:
         while True:
             query = listen_and_transcribe(listener=listener, transcriber=fs_transcriber)
@@ -21,6 +26,9 @@ def run_eva():
                 listener.shutdown()
                 exit()
                 break # --> Just in case
+            
+    except Exception as e:
+        print(f"[ERR - main]: {e}")
     finally:
         listener.shutdown()
 
