@@ -1,16 +1,13 @@
 # ---------- IMPORTS ----------
 
+from backend.config import Config
 from core.functions.speech import SpeechEngine
 from core.functions.listener import listen_and_transcribe, Listener, FS_Transcriber
 from core.brain.primary_llm import get_llm_response
-from backend.config import Config
 
 # ---------- MAIN ----------
 
 def run_eva():
-    main_config = Config()
-    main_config.load_config_file()
-
     listener = Listener() # --> Initialises listener
     sp_engine = SpeechEngine() # --> Initialises Speech Engine
     fs_transcriber = FS_Transcriber() # --> Initialises transcriber

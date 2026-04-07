@@ -12,21 +12,22 @@ CONFIG_FILE = "assets/system/config.yaml" # Hardcoded --> DO NOT CHANGE unless y
 class ConfigException(Exception):
     pass
 
-# ---------- CONFIG CLASS DEFINITION ----------
+# ---------- STATIC CONFIG CLASS DEFINITION ----------
 
 class Config:
-    def __init__(self):
-        self.CONFIG_FILE = CONFIG_FILE
-        global config
+    config = None
 
-    def load_config_file(self) -> None:
+    def load_config_file() -> None:
         try:
-            with open(self.CONFIG_FILE, "r") as cf:
+            with open(CONFIG_FILE, "r") as cf:
                 Config.config = yaml.safe_load(cf) or {}
         except FileNotFoundError:
-            raise ConfigException(f"Config file '{self.CONFIG_FILE}' not found")
+            raise ConfigException(f"Config file '{CONFIG_FILE}' not found")
+        print("Success")
+    
+    load_config_file()
 
-    def get_parameter(self, param: str) -> Any: # --> Use only if parameter is REQUIRED (Strict)
+    def get_parameter(param: str) -> Any: # --> Use only if parameter is REQUIRED (Strict)
         if Config.config is None:
             raise ConfigException("Config file not loaded")
         
@@ -39,7 +40,7 @@ class Config:
             result = result[_param]
         return result
            
-    def get(self, param: str, default: Any = None) -> Any: # --> General use cases (use default)
+    def get(param: str, default: Any = None) -> Any: # --> General use cases (use default)
         if Config.config is None:
             raise ConfigException("Config file not loaded")
         
@@ -52,16 +53,16 @@ class Config:
             result = result.get(_param, default)
         return result
 
-    def set_parameter(self, param: str, value: Any) -> None:
+    def set_parameter(param: str, value: Any) -> None:
         if Config.config is None:
             raise ConfigException("Config file not loaded")
         Config.config[param] = value
 
-    def update_config_file(self) -> None:
+    def update_config_file() -> None:
         try:
-            with open(self.CONFIG_FILE, "w") as cf:
+            with open(CONFIG_FILE, "w") as cf:
                 yaml.safe_dump(data=Config.config, stream=cf, sort_keys=False)
         except FileNotFoundError:
-            raise ConfigException(f"Config file '{self.CONFIG_FILE}' not found")
+            raise ConfigException(f"Config file '{CONFIG_FILE}' not found")
 
 #*---------- END OF CODE ----------*

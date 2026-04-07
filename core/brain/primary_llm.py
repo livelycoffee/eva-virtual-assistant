@@ -8,13 +8,11 @@ from backend.config import Config
 
 # ---------- CONFIGURATION ----------
 
-config = Config()
-
-MODEL = config.get_parameter("models.PRIMARY_LLM_MODEL") # --> or gemma3 or pheem49/Luna:qwen3-4b
+MODEL = Config.get_parameter("models.PRIMARY_LLM_MODEL") # --> or gemma3 or pheem49/Luna:qwen3-4b
 #MODEL_SMALL = "qwen3:0.6b" # commented to prevent errors on runtime, uncomment if required
 
-CHAT_LOG = config.get_parameter("database.CHAT_LOG")
-MAX_HISTORY = config.get("memory.MAX_HISTORY", 50)
+CHAT_LOG = Config.get_parameter("database.CHAT_LOG")
+MAX_HISTORY = Config.get("memory.MAX_HISTORY", 50)
 
 SYSTEM_MESSAGE = "You are EVA, an AI Assistant. Respond in short in only 1-2 sentences max, or maybe even less, until and unless specified by the user or absolutely necessary. Never respond with emojis. Use the tools (with proper input) only when the user asks for a task to be done."
 

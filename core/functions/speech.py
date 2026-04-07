@@ -7,9 +7,8 @@ from backend.config import Config
 
 # ---------- CONFIGURATION ----------
 
-cf = Config()
-PIPER_MODEL = cf.get_parameter("models.PIPER_MODEL") # or path to piper model
-ASSISTANT_NAME = cf.get("assistant.name", "EVA")
+PIPER_MODEL = Config.get_parameter("models.PIPER_MODEL") # or path to piper model
+ASSISTANT_NAME = Config.get("assistant.name", "EVA")
 
 # ---------- SPEECH ENGINE ----------
 

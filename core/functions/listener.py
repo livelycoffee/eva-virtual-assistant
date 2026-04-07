@@ -10,16 +10,14 @@ from backend.config import Config
 
 # ---------- CONFIGURATION SETUP ----------
 
-config = Config()
+MODEL_SIZE = Config.get("models.WHISPER_MODEL", "tiny")
+USER_NAME = Config.get("user.name", "USER")
 
-MODEL_SIZE = config.get("models.WHISPER_MODEL", "tiny")
-USER_NAME = config.get("user.name", "USER")
-
-PAUSE_THRESHOLD = config.get("listener.PAUSE_THRESHOLD", 1.2)
-SPEECH_THRESHOLD = config.get("listener.SPEECH_THRESHOLD", 3.6)
-AUDIO_THRESHOLD = config.get("listener.AUDIO_THRESHOLD", 0.1)
-LOOP_SLEEP_TIME = config.get("listener.LOOP_SLEEP_TIME", 0.03)
-STREAM_LIFETIME = config.get("listener.STREAM_LIFETIME", 3)
+PAUSE_THRESHOLD = Config.get("listener.PAUSE_THRESHOLD", 1.2)
+SPEECH_THRESHOLD = Config.get("listener.SPEECH_THRESHOLD", 3.6)
+AUDIO_THRESHOLD = Config.get("listener.AUDIO_THRESHOLD", 0.1)
+LOOP_SLEEP_TIME = Config.get("listener.LOOP_SLEEP_TIME", 0.03)
+STREAM_LIFETIME = Config.get("listener.STREAM_LIFETIME", 3)
 
 SAMPLE_RATE = 16000 # Needs to support dynamic selection in the future (DO NOT ADD TO CONFIG)
 
@@ -42,8 +40,8 @@ class Listener:
         volume = math.sqrt(np.dot(indata.ravel(), indata.ravel())) * 10
 
         if volume > SPEECH_THRESHOLD: # USER SPEECH DETECTION
-            self.started = True 
-            self.prev_time = time.time() 
+            self.prev_time = time.time()
+            self.started = True  
 
         if volume > AUDIO_THRESHOLD and self.started: # AUDIO DETECTION
             try:
@@ -66,7 +64,7 @@ class Listener:
         while True: # INNER LOOP
             time.sleep(LOOP_SLEEP_TIME)
             try:
-                chunk = self.audio_queue.get(timeout=0.5)
+                chunk = self.audio_queue.get(timeout=0.1)
                 self.sound_data.append(chunk)
             except queue.Empty:
                 continue
