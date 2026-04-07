@@ -66,6 +66,7 @@ class Listener:
                 chunk = self.audio_queue.get(timeout=0.1)
                 self.sound_data.append(chunk)
             except queue.Empty:
+                time.sleep(LOOP_SLEEP_TIME)
                 continue
 
             if ((time.time() - self.prev_time) >= STREAM_LIFETIME) and not self.started: # --> Temporary macos hang fix
@@ -74,8 +75,6 @@ class Listener:
 
             if ((time.time() - self.prev_time) >= PAUSE_THRESHOLD) and self.started:
                 break
-            
-            time.sleep(LOOP_SLEEP_TIME)
         self.stream.stop()
 
         while True:
