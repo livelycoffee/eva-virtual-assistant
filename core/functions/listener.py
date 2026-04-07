@@ -62,7 +62,6 @@ class Listener:
 
         self.stream.start()
         while True: # INNER LOOP
-            time.sleep(LOOP_SLEEP_TIME)
             try:
                 chunk = self.audio_queue.get(timeout=0.1)
                 self.sound_data.append(chunk)
@@ -75,6 +74,8 @@ class Listener:
 
             if ((time.time() - self.prev_time) >= PAUSE_THRESHOLD) and self.started:
                 break
+            
+            time.sleep(LOOP_SLEEP_TIME)
         self.stream.stop()
 
         while True:
