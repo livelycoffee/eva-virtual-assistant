@@ -3,6 +3,9 @@
 import datetime
 import webbrowser
 import urllib.parse
+import requests
+import bs4
+import wikipedia
 from exec_layer.main_executor.int_check import is_connected
 import time
 
@@ -118,6 +121,20 @@ def set_volume(level: int) -> bool:
     return _platform[PLATFORM].set_volume(level)
 
 
+@register("set_brightness")
+def set_brightness(level: int) -> bool:
+    '''
+    Function to set the brightness of user device display to certain level (eg. 20%).
+
+    Args:
+        level (int): The brightness level to set display at.
+
+    Returns:
+        status (bool): Success status of setting the brightness.
+    '''
+    return _platform[PLATFORM].set_brightness(level)
+
+
 # ---------- DEFAULT FUNCTION DEFINITIONS ---------- (PLATFORM INDEPENDENT)
 
 @register("get_current_time")
@@ -224,6 +241,67 @@ def search_web(query: str) -> bool:
     except Exception as e:
         print(f"[ERR - search_web]: {e}")
         return False
+    
+
+@register("search_wikipedia")
+def search_wikipedia(query: str) -> str:
+    '''
+    Function to search wikipedia and get a summary for the given topic title.
+
+    Args:
+        query (str): Topic title to get summary from wikipedia for.
+
+    Return:
+        result (str): Summary of given topic title.
+    '''
+    try:
+        query = wikipedia.search(str(query))[0]
+        return wikipedia.summary(str(query), sentences=2, auto_suggest=False)
+    except Exception as e:
+        print(f"[ERR - search_wikipedia]: {e}")
+        return "Could not search wikipedia!"
+
+
+@register("play_on_youtube")
+def play_on_youtube(query: str) -> str:
+    '''
+    Function to directly play the first result of a query on YouTube.
+    Used to directly play YouTube videos.
+
+    Args:
+        query (str): The query to search for and play the first result of.
+    
+    Returns:
+        status (str): Result of playing the YouTube video.
+    '''
+    encoded = urllib.parse.quote(query.strip())
+    url = f"https://www.youtube.com/results?search_query={encoded}"
+    try:
+        web_page = requests.get(url, timeout=5)
+        data = web_page.content
+        data = str(data)
+        elements = data.split('"')
+
+        for element in elements:
+            if element == "WEB_PAGE_TYPE_WATCH":
+                index = elements.index(element) + 1
+                break
+        
+        completor = elements[index-5]
+        if completor == "/results":
+            print(f"[ERR - play_on_youtube]: No video found for this query!")
+            return "No YouTube video found for this query"
+
+        video = f"https://www.youtube.com{completor}"
+        webbrowser.open(video, new=2)
+
+        video_page = requests.get(video, timeout=5)
+        html = bs4.BeautifulSoup(video_page.text, features="html.parser")
+        return f"Playing {str(html.title.string)}..."
+    
+    except Exception as e:
+        print(f"[ERR - play_on_youtube]: {e}")
+        return "Could not play YouTube video!"
 
 
 # ---------- DEFAULT FUNCTION DEFINITIONS ---------- (Pythonic)

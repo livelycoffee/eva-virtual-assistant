@@ -135,6 +135,18 @@ def set_volume(level: int) -> bool:
     except Exception as e:
         print(f"[ERR - set_vol]: {e}")
         return False
+    
+
+def set_brightness(level: int) -> bool:
+    try:
+        level = int(level)
+        level = max(0, min(100, level))
+        level = float(level)/100
+        subprocess.run(["brightness", str(level)], check=True)
+        return True
+    except Exception as e:
+        print(f"[ERR - set_brightness]: {e}")
+        return False
 
 
 # ---------- MACOS PLUGIN FUNCTIONS ----------

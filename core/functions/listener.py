@@ -16,7 +16,7 @@ USER_NAME = Config.get("user.name", "USER")
 PAUSE_THRESHOLD = Config.get("listener.PAUSE_THRESHOLD", 1.2)
 SPEECH_THRESHOLD = Config.get("listener.SPEECH_THRESHOLD", 3.6)
 AUDIO_THRESHOLD = Config.get("listener.AUDIO_THRESHOLD", 0.1)
-LOOP_SLEEP_TIME = Config.get("listener.LOOP_SLEEP_TIME", 0.03)
+LOOP_SLEEP_TIME = Config.get("listener.LOOP_SLEEP_TIME", 0.02)
 STREAM_LIFETIME = Config.get("listener.STREAM_LIFETIME", 3)
 
 SAMPLE_RATE = 16000 # Needs to support dynamic selection in the future (DO NOT ADD TO CONFIG)
