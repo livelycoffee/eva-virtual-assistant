@@ -41,7 +41,7 @@ def set_brightness(level: int) -> bool:
     raise NotImplementedError("[ERR]: Windows functionality has not been implemented!")
 
 
-# ---------- MACOS PLUGIN FUNCTIONS ----------
+# ---------- WINDOWS PLUGIN FUNCTIONS ----------
 
 # >> For USER to Add Custom Windows Functions
 # Make sure to add function counterpart in main_exec with proper docstrings.
