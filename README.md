@@ -2,7 +2,7 @@
   <img src="public/assets/images/eva_logo.png" width="360" />
 </p>
 
-<h1 align="center">⚖️ EVA Virtual Assistant (ADVANCED)</h1>
+<h1 align="center">😊 EVA Virtual Assistant (ADVANCED)</h1>
 Welcome to the EVA (Advanced) Virtual Assistant Project!
 
 ## Introduction
