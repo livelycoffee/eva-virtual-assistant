@@ -12,7 +12,7 @@ ASSISTANT_NAME = Config.get("assistant.name", "EVA")
 
 # ---------- SPEECH ENGINE ----------
 
-class SpeechEngine():
+class SpeechEngine:
     def __init__(self):
         self.voice = PiperVoice.load(model_path=PIPER_MODEL)
         self.SAMPLE_RATE = self.voice.config.sample_rate
