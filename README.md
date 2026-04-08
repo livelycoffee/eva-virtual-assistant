@@ -3,6 +3,23 @@
 </p>
 
 <h1 align="center">😊 EVA Virtual Assistant (ADVANCED)</h1>
+
+<p align="center"><b>EVA is an OpenSource Advanced Virtual Desktop Assistant that runs fully Offline!</b></p>
+<br>
+<p align="center">🚀 Perform any complex query and execute commands</p>
+<p align="center">💬 Ask it questions and use in general conversations</p>
+<p align="center">✏️ Customise to your liking, full control</p>
+
+---
+
+<p align="center">
+  <img src="https://img.shields.io/badge/github-repo-blue?logo=github"/>
+  <img src="https://img.shields.io/badge/License-MIT-green"/>
+  <img src="https://img.shields.io/badge/docs-passing-green"/>
+</p>
+
+---
+
 Welcome to the EVA (Advanced) Virtual Assistant Project!
 
 ## Introduction
