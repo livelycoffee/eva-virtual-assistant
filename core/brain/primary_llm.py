@@ -90,6 +90,8 @@ def get_llm_response(query):
             ], stream=False, think=False)
 
     history.append({"role": "user", "content": query})
+    if tool_used:
+        history.append({"role":"tool", "content": json.dumps(tool_payload)})
     history.append({"role":"assistant","content":str(response.message.content)})
     history = history[-MAX_HISTORY:]
 
