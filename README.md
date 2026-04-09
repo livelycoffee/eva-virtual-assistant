@@ -2,9 +2,9 @@
   <img src="public/assets/images/eva_logo.png" width="360" />
 </p>
 
-<h1 align="center">😊 EVA - Advanced Offline Virtual Assistant</h1>
+<h1 align="center">EVA - Advanced Offline Virtual Assistant</h1>
 
-<p align="center"><b>EVA is an OpenSource Advanced Virtual Desktop Assistant that runs fully Offline!</b></p>
+<p align="center"><b>EVA is an OpenSource Advanced Virtual Desktop Assistant that runs fully Offline! 😊</b></p>
 <br>
 <p align="center">🚀 Perform any complex query and execute commands</p>
 <p align="center">💬 Ask it questions and use in general conversations</p>
