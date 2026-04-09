@@ -54,7 +54,7 @@ To first exit the program, you must run the following commands in the terminal w
 1. Try doing `Ctrl+C`, if the program does not exit, do `Ctrl+Z` to suspend the program.
 2. `ps aux | grep python` - this should display all running python processes.
     - Try to find a process that ends with `... -m main` or `... main`.
-    - Copy the Porcess ID (will be a 4-5 digit number, eg. 5103) of the process.
+    - Copy the Process ID (will be a 4-5 digit number, eg. 5103) of the process.
 3. `kill process-id` where you replace `process-id` with the ID you copied.
 
 This should have successfully stopped your program. Next do the following to prevent this:
