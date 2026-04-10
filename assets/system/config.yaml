@@ -9,15 +9,15 @@ user:
 
 models:
   PRIMARY_LLM_MODEL: "qwen3:4b-q4_K_M" # default (best)
-  PIPER_MODEL: "models/voice_models/en_US-hfc_female-medium.onnx" # eg. models/voice_models/en_US-hfc_female-medium.onnx
+  PIPER_MODEL: "models/voice_models/piper-model-here" # eg. models/voice_models/en_US-hfc_female-medium.onnx
   # NOTE: Make sure you have a matching .onnx.json file for your model 
-  WHISPER_MODEL: "small" # or "small"
+  WHISPER_MODEL: "tiny" # or "small"
 
 listener:
   PAUSE_THRESHOLD: 1.2 # seconds
-  SPEECH_THRESHOLD: 3.4 # old - 3.5
+  SPEECH_THRESHOLD: 3.6 # old - 3.5
   AUDIO_THRESHOLD: 0.1 # old - 0.1
-  LOOP_SLEEP_TIME: 0.02 # seconds (old - 0.03)
+  LOOP_SLEEP_TIME: 0.03 # seconds (old - 0.03)
   STREAM_LIFETIME: 4 # seconds
 
 database:
