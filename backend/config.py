@@ -16,6 +16,11 @@ class ConfigException(Exception):
 
 class Config:
     config = None
+    try:
+        with open(CONFIG_FILE, "r") as cf:
+            config = yaml.safe_load(cf) or {}
+    except FileNotFoundError:
+        raise ConfigException(f"Config file '{CONFIG_FILE}' not found")
 
     def load_config_file() -> None:
         try:
@@ -24,8 +29,6 @@ class Config:
         except FileNotFoundError:
             raise ConfigException(f"Config file '{CONFIG_FILE}' not found")
         print("Success")
-    
-    load_config_file()
 
     def get_parameter(param: str) -> Any: # --> Use only if parameter is REQUIRED (Strict)
         if Config.config is None:
