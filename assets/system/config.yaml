@@ -15,7 +15,7 @@ models:
 
 listener:
   PAUSE_THRESHOLD: 1.2 # seconds
-  SPEECH_THRESHOLD: 3.6 # old - 3.5
+  SPEECH_THRESHOLD: 3.2 # old - 3.5
   AUDIO_THRESHOLD: 0.1 # old - 0.1
   LOOP_SLEEP_TIME: 0.02 # seconds (old - 0.03)
   STREAM_LIFETIME: 4 # seconds
