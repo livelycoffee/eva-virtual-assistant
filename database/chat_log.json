@@ -18,5 +18,81 @@
   {
     "role": "assistant",
     "content": "Volume set to 90. Let me know if you need anything else."
+  },
+  {
+    "role": "user",
+    "content": "open youtube."
+  },
+  {
+    "role": "tool",
+    "content": "[{\"tool\": \"open_link\", \"args\": {\"url\": \"https://www.youtube.com\"}, \"result\": true}]"
+  },
+  {
+    "role": "assistant",
+    "content": "I have opened the YouTube link for you. Let me know if you need anything else."
+  },
+  {
+    "role": "user",
+    "content": "open discord."
+  },
+  {
+    "role": "tool",
+    "content": "[{\"tool\": \"open_app\", \"args\": {\"target\": \"Discord\"}, \"result\": false}]"
+  },
+  {
+    "role": "assistant",
+    "content": "I couldn't open Discord. Let me try again."
+  },
+  {
+    "role": "user",
+    "content": "open discord on chrome."
+  },
+  {
+    "role": "tool",
+    "content": "[{\"tool\": \"open_link\", \"args\": {\"url\": \"https://discord.com\"}, \"result\": true}]"
+  },
+  {
+    "role": "assistant",
+    "content": "I have opened the link for you."
+  },
+  {
+    "role": "user",
+    "content": "open chrome."
+  },
+  {
+    "role": "tool",
+    "content": "[{\"tool\": \"open_app\", \"args\": {\"target\": \"Chrome\"}, \"result\": true}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Chrome is now open. Let me know if you need anything else."
+  },
+  {
+    "role": "user",
+    "content": "open youtube and search sabrina carventus."
+  },
+  {
+    "role": "tool",
+    "content": "[{\"tool\": \"open_link\", \"args\": {\"url\": \"https://www.youtube.com/search?q=sabrina+carventus\"}, \"result\": true}]"
+  },
+  {
+    "role": "assistant",
+    "content": "I have opened the link for you. Let me know if you need anything else."
+  },
+  {
+    "role": "user",
+    "content": "good night."
+  },
+  {
+    "role": "assistant",
+    "content": "Good night! Have a peaceful sleep. \ud83d\ude0a"
+  },
+  {
+    "role": "user",
+    "content": "goodbye."
+  },
+  {
+    "role": "assistant",
+    "content": "_shutdown\n{\"name\": \"shutdown\", \"arguments\": {}}"
   }
 ]
